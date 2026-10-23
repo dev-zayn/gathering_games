@@ -1,0 +1,29 @@
+{
+  "id": "arcade.giant-uno",
+  "name": "بقت وحدة!",
+  "version": "1.0.0",
+  "mode": "embedded",
+  "entry": "${PUBLIC_URL}/giant-uno/",
+  "orientation": "portrait",
+  "splash": false,
+  "publisher": {
+    "tier": "partner",
+    "name": "أركيد جمعة"
+  },
+  "scopes": [
+    "identity:read"
+  ],
+  "permissions": [],
+  "room": {
+    "players": {
+      "min": 2,
+      "max": 10
+    },
+    "host": "authoritative",
+    "pace": "turn",
+    "lan": true,
+    "state": "none",
+    "rejoin": true,
+    "spectators": false
+  }
+}

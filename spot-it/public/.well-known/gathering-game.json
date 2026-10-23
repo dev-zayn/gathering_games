@@ -1,0 +1,29 @@
+{
+  "id": "arcade.spot-it",
+  "name": "لگطها!",
+  "version": "1.0.0",
+  "mode": "embedded",
+  "entry": "${PUBLIC_URL}/spot-it/",
+  "orientation": "portrait",
+  "splash": false,
+  "publisher": {
+    "tier": "partner",
+    "name": "أركيد جمعة"
+  },
+  "scopes": [
+    "identity:read"
+  ],
+  "permissions": [],
+  "room": {
+    "players": {
+      "min": 2,
+      "max": 8
+    },
+    "host": "authoritative",
+    "pace": "realtime",
+    "lan": true,
+    "state": "none",
+    "rejoin": true,
+    "spectators": false
+  }
+}

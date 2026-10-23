@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#0F1222">
+  <title>إكس أو</title>
+  <!-- إكس أو (fixture.xo): a sample game for جمعة, served beside its
+       manifest in .well-known/. Two players, turn by turn, one 3×3 grid: an authoritative
+       host keeps the state blob {board[9], turn, winner} and every phone
+       draws it. Opened outside a room `room.current()` answers null: the
+       game is played in practice mode, one phone for both sides, and its
+       first screen offers a room with a friend ("العب ويا صديق" is
+       `room.create()`, "انضم لغرفة" is `room.join()`) or a tournament
+       ("سوّي بطولة", "انضم لبطولة": `tournament.create()`,
+       `tournament.join()`); in a match room a banner shows the match. The
+       "المزيد" screen calls every window.gathering function
+       (docs/GAME_BRIDGE.md). Opened from disk in a desktop browser, a
+       stand-in bridge keeps it working. Plain HTML, CSS and JS: no build
+       step, nothing loaded from the network. -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main id="game" class="screen" aria-labelledby="game-title">
+    <header class="top">
+      <div class="heading">
+        <h1 id="game-title">إكس أو</h1>
+        <span id="mode" class="chip">تمرين</span>
+      </div>
+      <button id="open-more" class="key ghost corner" type="button">المزيد</button>
+    </header>
+
+    <button id="match" class="match" type="button" hidden>
+      <span class="match-head">
+        <svg class="match-cup" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 4h8v5a4 4 0 0 1-8 0V4z"/><path d="M8 6H5a3 3 0 0 0 3 4M16 6h3a3 3 0 0 1-3 4"/><path d="M12 13v4M8 20h8M10 17h4"/></svg>
+        <span class="match-words">
+          <b id="match-name" class="match-name"></b>
+          <span id="match-line" class="match-line"></span>
+        </span>
+        <span class="match-open">البطولة</span>
+      </span>
+      <span id="match-tally" class="match-tally" hidden></span>
+    </button>
+
+    <section class="tally" aria-label="عدّاد الجولات">
+      <div class="score x"><span class="mark" aria-hidden="true">X</span><span class="label">فوز X</span><b id="tally-x" class="num">0</b></div>
+      <div class="score draw"><span class="mark" aria-hidden="true">=</span><span class="label">تعادل</span><b id="tally-draw" class="num">0</b></div>
+      <div class="score o"><span class="mark" aria-hidden="true">O</span><span class="label">فوز O</span><b id="tally-o" class="num">0</b></div>
+    </section>
+
+    <p id="status" class="status" role="status" aria-live="polite"></p>
+
+    <div id="board" class="board" role="group" aria-label="اللوحة"></div>
+
+    <div class="actions">
+      <button id="again" class="key primary" type="button">من جديد</button>
+      <button id="reset-tally" class="key ghost" type="button">صفّر العدّاد</button>
+    </div>
+
+    <section id="together" class="together" aria-label="ويّا أصدقاءك" hidden>
+      <div class="together-keys">
+        <button id="play-friend" class="key friend" type="button">العب ويا صديق</button>
+        <button id="join-room" class="key" type="button">انضم لغرفة</button>
+      </div>
+      <div class="together-keys">
+        <button id="make-tournament" class="key cup" type="button">سوّي بطولة</button>
+        <button id="join-tournament" class="key" type="button">انضم لبطولة</button>
+      </div>
+      <p id="together-line" class="together-line" role="status" aria-live="polite" hidden></p>
+    </section>
+    <p id="hint" class="hint"></p>
+  </main>
+
+  <main id="more" class="screen" aria-labelledby="more-title" hidden>
+    <header class="top">
+      <div class="heading">
+        <h1 id="more-title">المزيد</h1>
+        <span class="chip">للفاحص</span>
+      </div>
+      <button id="close-more" class="key ghost corner" type="button">رجوع</button>
+    </header>
+    <p id="where" class="where"></p>
+    <div id="calls" class="calls"></div>
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+  <script src="app.js"></script>
+</body>
+</html>

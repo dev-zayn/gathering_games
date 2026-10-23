@@ -1,0 +1,455 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+/* Self-hosted Alexandria + IBM Plex Sans Arabic + Press Start 2P (see
+   src/fonts.css) — same files Google serves, from our own origin: no
+   third-party font connections, so a game on a Wi-Fi without the internet
+   still paints in its own type. */
+@import "./fonts.css";
+
+/* One theme ships: the arcade at night. Pinning the variant to a class nobody
+   sets keeps the shadcn primitives' `dark:` utilities inert — the palette below
+   is already dark, and a second restyle on top would fight it. */
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* The arcade's palette — an arcade after closing: night floor, cabinet panels,
+     the CRT's black, and three neon tubes (coin yellow, cyan, hot pink). */
+  --night: #120d24;
+  --cabinet: #1d1638;
+  --crt: #0a0716;
+  --glow: #f3eeff;
+  --coin: #ffd23f;
+  --neon: #29e7ff;
+  --plasma: #ff3d8b;
+
+  /* Semantic tokens mapped onto the palette (shadcn-compatible names). */
+  --background: var(--night);
+  --foreground: var(--glow);
+  --card: var(--cabinet);
+  --card-foreground: var(--glow);
+  --popover: var(--cabinet);
+  --popover-foreground: var(--glow);
+  /* The call to action is a coin-yellow key with night type — INSERT COIN. */
+  --primary: var(--coin);
+  --primary-foreground: var(--crt);
+  --secondary: #2a2150;
+  --secondary-foreground: var(--glow);
+  --muted: #2a2150;
+  --muted-foreground: #a99fcc;
+  --accent: #3a3113;
+  --accent-foreground: var(--coin);
+  --destructive: var(--plasma);
+  --border: #372c66;
+  --input: #372c66;
+  --ring: var(--neon);
+
+  /* Safe-area insets, indirected so a frame that misreports them can be
+     corrected in one place. Always consume these, never raw env(). */
+  --safe-top: env(safe-area-inset-top);
+  --safe-bottom: env(safe-area-inset-bottom);
+}
+
+@theme inline {
+  --font-sans: "IBM Plex Sans Arabic", system-ui, -apple-system, sans-serif;
+  /* Headings, keys, big words. */
+  --font-display: "Alexandria", "IBM Plex Sans Arabic", system-ui, sans-serif;
+  --font-heading: var(--font-display);
+  /* The 8-bit face — Latin only (SCORE, P1, 3·2·1, INSERT COIN). Arabic copy
+     never uses it: it has no Arabic glyphs and would fall back mid-word. */
+  --font-pixel: "Press Start 2P", ui-monospace, monospace;
+
+  /* Font-size-only tokens, px-named, with NO `--text-*--line-height` companion
+     so they never impose a line-height of their own. Register every new one in
+     the tailwind-merge font-size group in src/lib/utils.ts. */
+  --text-9: 0.5625rem;
+  --text-10: 0.625rem;
+  --text-11: 0.6875rem;
+  --text-12: 0.75rem;
+  --text-13: 0.8125rem;
+  --text-14: 0.875rem;
+  --text-15: 0.9375rem;
+  --text-16: 1rem;
+  --text-17: 1.0625rem;
+  --text-18: 1.125rem;
+  --text-20: 1.25rem;
+  --text-22: 1.375rem;
+  --text-24: 1.5rem;
+  --text-28: 1.75rem;
+  --text-32: 2rem;
+  --text-40: 2.5rem;
+  --text-56: 3.5rem;
+  --text-72: 4.5rem;
+
+  /* Radii by role — tight, near-square: pixels don't round. */
+  --radius-control: 0.25rem; /* 4 — chips' tiles, segment buttons */
+  --radius-button: 0.375rem; /* 6 — keys, fields */
+  --radius-card: 0.5rem; /* 8 — cards, cabinets */
+  --radius-section: 0.625rem; /* 10 — the game screen */
+  --radius-sheet: 0.875rem; /* 14 — bottom-sheet top corners */
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Ink — the glow of type on the dark floor. */
+  --color-ink: var(--glow);
+  --color-ink-soft: #cbc3e8; /* secondary body copy */
+  --color-ink-faint: #8b81b3; /* idle icons, hints */
+  /* Surfaces. `screen` is the CRT's black — game screens, toasts, key borders. */
+  --color-screen: var(--crt);
+  --color-hairline: var(--border); /* card outlines */
+  --color-divider: #2a2150; /* row rules, neutral chips */
+  --color-sand: #2a2150; /* segmented-control track, disabled keys */
+  --color-ghost: #241c47; /* hover on outline keys */
+  --color-rule: #4a3d85; /* outline-key border, sheet handle */
+  --color-dash: #5b4d9e; /* dashed add-keys */
+  --color-placeholder: #7d73a6;
+  /* Coin — the call to action, scores, the high-score line. */
+  --color-coin: var(--coin);
+  --color-coin-glow: #ffe07a; /* key hover */
+  --color-coin-soft: var(--accent); /* score tags, picked tiles */
+  --color-coin-ink: var(--accent-foreground);
+  /* Neon — player two, links, selected chips. */
+  --color-neon: var(--neon);
+  --color-neon-foreground: var(--crt);
+  --color-neon-deep: #12c2dc;
+  --color-neon-soft: #10333f;
+  /* Plasma — the outsider, fouls, danger. */
+  --color-plasma: var(--plasma);
+  --color-plasma-deep: #e0206f;
+  --color-plasma-soft: #3d1330;
+  /* Status. */
+  --color-success: #52ff8f;
+  --color-success-soft: #12351f;
+  --color-success-ink: #7dffab;
+  --color-danger-soft: var(--color-plasma-soft);
+  --color-danger-ink: #ff7fb0;
+
+  /* Easings. `back` overshoots past the end value; the cubics are the standard
+     easeOut / easeIn curves; `soft` is the CSS twin of framer's [0.22, 1, 0.36, 1];
+     `steps` is the 8-bit stutter — motion that ticks instead of glides. */
+  --ease-out-back: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-out-cubic: cubic-bezier(0.215, 0.61, 0.355, 1);
+  --ease-in-cubic: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* ── Arcade loops ──────────────────────────────────────────────────────────
+     Deliberately CSS, not framer-motion: the motion feature chunk is idle-
+     deferred (main.tsx), so `m` components would sit still through the splash.
+     Transform/opacity only, every loop on the compositor. The overlay in
+     index.html carries byte-for-byte copies of `blink` and `sprite-hop`. */
+
+  /* «INSERT COIN» — the hard on/off of an attract screen, no fade. */
+  --animate-blink: blink 1.1s steps(1, end) infinite;
+  @keyframes blink {
+    0%,
+    60% {
+      opacity: 1;
+    }
+    61%,
+    100% {
+      opacity: 0;
+    }
+  }
+  /* A sprite's idle hop, in four frames — each game's cabinet art. */
+  --animate-sprite-hop: sprite-hop 1.2s steps(4, end) infinite;
+  @keyframes sprite-hop {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-6px);
+    }
+  }
+  /* The coin turning on the splash and the home marquee. */
+  --animate-coin-spin: coin-spin 1.4s steps(8, end) infinite;
+  @keyframes coin-spin {
+    0%,
+    100% {
+      transform: scaleX(1);
+    }
+    50% {
+      transform: scaleX(0.1);
+    }
+  }
+  /* A word dealt onto the screen — the reveal card, a charades word. */
+  --animate-pixel-pop: pixel-pop 360ms steps(5, end) backwards;
+  @keyframes pixel-pop {
+    from {
+      opacity: 0;
+      transform: scale(0.4);
+    }
+  }
+  /* The screen shaking on a foul or a caught outsider. */
+  --animate-shake: shake 420ms steps(6, end) both;
+  @keyframes shake {
+    0%,
+    100% {
+      transform: translateX(0);
+    }
+    20%,
+    60% {
+      transform: translateX(-6px);
+    }
+    40%,
+    80% {
+      transform: translateX(6px);
+    }
+  }
+  /* Countdown digits slamming in — 3 · 2 · 1. */
+  --animate-count-slam: count-slam 600ms var(--ease-out-back) both;
+  @keyframes count-slam {
+    from {
+      opacity: 0;
+      transform: scale(2.4);
+    }
+  }
+  /* The marquee ticker on home — one strip, translated across and wrapped. */
+  --animate-marquee: marquee 16s linear infinite;
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(50%);
+    }
+  }
+
+  /* A CRT powering on: a bright line that opens into the picture — the game
+     loading screens. `crt-off` is the same tube collapsing on PRESS START. */
+  --animate-crt-on: crt-on 620ms var(--ease-out-cubic) both;
+  @keyframes crt-on {
+    0% {
+      opacity: 0;
+      transform: scale(0.6, 0.004);
+    }
+    35% {
+      opacity: 1;
+      transform: scale(1, 0.004);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1, 1);
+    }
+  }
+  --animate-crt-off: crt-off 340ms var(--ease-in-cubic) both;
+  @keyframes crt-off {
+    0% {
+      opacity: 1;
+      transform: scale(1, 1);
+    }
+    60% {
+      opacity: 1;
+      transform: scale(1, 0.004);
+    }
+    100% {
+      opacity: 0;
+      transform: scale(0, 0.004);
+    }
+  }
+  /* The poster drifting in, slow, behind the HUD. */
+  --animate-poster-drift: poster-drift 7s var(--ease-out-soft) both;
+  @keyframes poster-drift {
+    from {
+      transform: scale(1.12);
+    }
+  }
+  /* One block of the 8-bit loading bar switching on. */
+  --animate-block-on: block-on 1ms steps(1, end) backwards;
+  @keyframes block-on {
+    from {
+      opacity: 0.12;
+    }
+  }
+
+  /* ── Content ────────────────────────────────────────────────────────────── */
+
+  /* Card cascade (per-card delay set inline) — the cabinets on home share one
+     motion shape so the app has one entrance, not five. */
+  --animate-card-enter: card-enter 520ms var(--ease-out-cubic) both;
+  @keyframes card-enter {
+    from {
+      opacity: 0;
+      transform: translateY(16px) scale(0.96);
+    }
+  }
+  /* A section settling into place: a short rise under a fade. `backwards`, not
+     `both`: a retained `transform: none` still makes the element the containing
+     block for every `position: fixed` descendant, which would trap a sheet
+     opened from inside it. */
+  --animate-rise-in: rise-in 320ms var(--ease-out-soft) backwards;
+  @keyframes rise-in {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+  }
+  /* A win: the headline lands on an overshoot. */
+  --animate-celebrate: celebrate 620ms var(--ease-out-back) backwards;
+  @keyframes celebrate {
+    0% {
+      opacity: 0;
+      transform: scale(0.6);
+    }
+    60% {
+      opacity: 1;
+      transform: scale(1.06);
+    }
+  }
+  /* A score tag popping when points land. */
+  --animate-badge-pop: badge-pop 480ms var(--ease-out-back) both;
+  @keyframes badge-pop {
+    from {
+      transform: scale(0.3);
+    }
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    /* App-like touch: no long-press callout, no grey tap flash. */
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: transparent;
+    /* Native feel: no rubber-band overscroll revealing a blank strip past the
+       host bar. */
+    overscroll-behavior: none;
+    background-color: var(--background);
+    color-scheme: dark;
+  }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    -webkit-user-select: none;
+    user-select: none;
+    overscroll-behavior: none;
+  }
+  a,
+  img,
+  svg {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+  /* Keep selection + the paste menu where it's actually needed. */
+  input,
+  textarea,
+  select,
+  [contenteditable="true"] {
+    -webkit-user-select: text;
+    user-select: text;
+  }
+  /* Native-app feel: no scrollbar tracks anywhere; scrolling stays functional. */
+  * {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  *::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@layer utilities {
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* Safe-area padding with a spacing-scale floor: `pb-safe-4` →
+   max(bottom-inset, 1rem). Always these, never raw env(). */
+@utility pt-safe-* {
+  padding-top: max(var(--safe-top), --spacing(--value(number)));
+}
+@utility pb-safe-* {
+  padding-bottom: max(var(--safe-bottom), --spacing(--value(number)));
+}
+
+/* The hard, offset, un-blurred shadow of a sprite on a tile map — every arcade
+   key and cabinet sits on one. Pressing a key sinks it into its shadow. */
+@utility shadow-pixel {
+  box-shadow: 3px 4px 0 0 var(--crt);
+}
+@utility shadow-pixel-lg {
+  box-shadow: 5px 6px 0 0 var(--crt);
+}
+
+/* Neon type: the tube's colour bleeding into the dark around it. Colour comes
+   from `currentColor`, so `text-neon glow-text` glows cyan. */
+@utility glow-text {
+  text-shadow:
+    0 0 6px color-mix(in oklab, currentColor 70%, transparent),
+    0 0 18px color-mix(in oklab, currentColor 40%, transparent);
+}
+@utility glow-box {
+  box-shadow:
+    0 0 0 2px currentColor,
+    0 0 18px color-mix(in oklab, currentColor 45%, transparent);
+}
+
+/* CRT scanlines laid over a game screen — a fixed stripe of the tube's black,
+   never animated (a moving overlay would repaint the whole screen). */
+@utility scanlines {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    rgb(10 7 22 / 0) 0,
+    rgb(10 7 22 / 0) 2px,
+    rgb(10 7 22 / 0.28) 3px,
+    rgb(10 7 22 / 0) 4px
+  );
+}
+
+/* The arcade floor: a faint pixel grid, the tile map everything stands on. */
+@utility pixel-grid {
+  background-image:
+    linear-gradient(rgb(41 231 255 / 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(41 231 255 / 0.05) 1px, transparent 1px);
+  background-size: var(--grid-cell, 16px) var(--grid-cell, 16px);
+}
+@utility grid-cell-* {
+  --grid-cell: --spacing(--value(number));
+}
+
+/* Bottom-sheet ceiling — tall enough for a form, never covering the host bar. */
+@utility max-h-sheet {
+  max-height: 85dvh;
+}
+
+/* Stagger a one-off entrance: `animation-delay-150` → 150ms. (Core Tailwind's
+   `delay-*` is transition-delay; cascades computed per index set it inline.) */
+@utility animation-delay-* {
+  animation-delay: calc(--value(integer) * 1ms);
+}
+
+/* Wide screens: the app is framed as a phone-width card with a 1rem margin,
+   and its <main> becomes the scroller. */
+@utility h-shell {
+  height: calc(100dvh - 2rem);
+}

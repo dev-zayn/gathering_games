@@ -1,0 +1,71 @@
+// لگطها's 57 symbols: one per point of the deck's plane (engine/games/spot-it/deck.ts),
+// so the index of a symbol here is the number a card carries. Emoji, so a
+// symbol is a picture on every phone without a sprite sheet; only ones every
+// phone of the last few years draws in colour (no variation selectors), each
+// a different shape or colour from its neighbours. The name is what a
+// screen reader says and what the catch line shows.
+
+export interface SpotSymbol {
+  glyph: string
+  name: string
+}
+
+export const SYMBOLS: readonly SpotSymbol[] = [
+  { glyph: '🍎', name: 'تفاحة' },
+  { glyph: '🍌', name: 'موزة' },
+  { glyph: '🍉', name: 'رگية' },
+  { glyph: '🍇', name: 'عنب' },
+  { glyph: '🍋', name: 'ليمونة' },
+  { glyph: '🍓', name: 'شليكة' },
+  { glyph: '🍒', name: 'كرز' },
+  { glyph: '🥕', name: 'جزرة' },
+  { glyph: '🍆', name: 'باذنجانة' },
+  { glyph: '🌽', name: 'عرنوص' },
+  { glyph: '🍄', name: 'فطر' },
+  { glyph: '🌵', name: 'صبّار' },
+  { glyph: '🌴', name: 'نخلة' },
+  { glyph: '🌻', name: 'عبّاد الشمس' },
+  { glyph: '🌹', name: 'وردة' },
+  { glyph: '🍁', name: 'ورقة شجر' },
+  { glyph: '⭐', name: 'نجمة' },
+  { glyph: '🌙', name: 'هلال' },
+  { glyph: '🌞', name: 'شمس' },
+  { glyph: '⚡', name: 'برق' },
+  { glyph: '🔥', name: 'نار' },
+  { glyph: '💧', name: 'قطرة' },
+  { glyph: '⛄', name: 'رجل الثلج' },
+  { glyph: '🌈', name: 'قوس قزح' },
+  { glyph: '🎈', name: 'بالون' },
+  { glyph: '🎁', name: 'هدية' },
+  { glyph: '🎲', name: 'زار' },
+  { glyph: '⚽', name: 'طوبة' },
+  { glyph: '🏀', name: 'كرة سلة' },
+  { glyph: '🎸', name: 'گيتار' },
+  { glyph: '🥁', name: 'طبل' },
+  { glyph: '🎺', name: 'بوري' },
+  { glyph: '🔔', name: 'جرس' },
+  { glyph: '🔑', name: 'مفتاح' },
+  { glyph: '🔒', name: 'قفل' },
+  { glyph: '💡', name: 'گلوب' },
+  { glyph: '⏰', name: 'منبّه' },
+  { glyph: '📌', name: 'دبوس' },
+  { glyph: '🎩', name: 'قبعة' },
+  { glyph: '👓', name: 'مناظر' },
+  { glyph: '💎', name: 'ألماسة' },
+  { glyph: '👑', name: 'تاج' },
+  { glyph: '🚀', name: 'صاروخ' },
+  { glyph: '🚗', name: 'سيارة' },
+  { glyph: '⚓', name: 'مرساة' },
+  { glyph: '🐪', name: 'جمل' },
+  { glyph: '🐟', name: 'سمچة' },
+  { glyph: '🐢', name: 'رگة' },
+  { glyph: '🐱', name: 'بزونة' },
+  { glyph: '🐶', name: 'كلب' },
+  { glyph: '🦁', name: 'أسد' },
+  { glyph: '🐸', name: 'عگروگ' },
+  { glyph: '🐝', name: 'نحلة' },
+  { glyph: '🦋', name: 'فراشة' },
+  { glyph: '🐧', name: 'بطريق' },
+  { glyph: '🦉', name: 'بومة' },
+  { glyph: '☕', name: 'قهوة' },
+]

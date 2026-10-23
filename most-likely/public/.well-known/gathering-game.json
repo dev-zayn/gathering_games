@@ -1,0 +1,29 @@
+{
+  "id": "arcade.most-likely",
+  "name": "منو أكثر واحد؟",
+  "version": "1.0.0",
+  "mode": "embedded",
+  "entry": "${PUBLIC_URL}/most-likely/",
+  "orientation": "portrait",
+  "splash": false,
+  "publisher": {
+    "tier": "partner",
+    "name": "أركيد جمعة"
+  },
+  "scopes": [
+    "identity:read"
+  ],
+  "permissions": [],
+  "room": {
+    "players": {
+      "min": 3,
+      "max": 16
+    },
+    "host": "authoritative",
+    "pace": "turn",
+    "lan": true,
+    "state": "none",
+    "rejoin": true,
+    "spectators": false
+  }
+}
