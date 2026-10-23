@@ -8,7 +8,7 @@ import { tournamentWords } from '../data/tournament-words'
 /**
  * The front door's tournament with friends: لگطها seats two, so a
  * knockout of duels works as well as a league round one table. «سوّي
- * بطولة» opens جمعة's own sheet to make one (the format picked there),
+ * بطولة» opens گعدة's own sheet to make one (the format picked there),
  * «انضم لبطولة» its sheet for a tournament's code; once in, the
  * tournament's page takes this page's place. Shown only in an app that has
  * tournaments.

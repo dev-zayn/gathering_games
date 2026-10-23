@@ -1,9 +1,9 @@
 # مثّلها · SILENT MOVIE
 
-A party game for جمعة (`arcade.charades`), 4–16 players, every one on
-**their own phone** in one of جمعة's rooms, the phone buzzing when it's their
+A party game for گعدة (`arcade.charades`), 4–16 players, every one on
+**their own phone** in one of گعدة's rooms, the phone buzzing when it's their
 turn. Arabic-first (RTL), mobile-only. Ported from a standalone web app that ran
-its own Bun game server; here جمعة owns the room and the host's phone runs the
+its own Bun game server; here گعدة owns the room and the host's phone runs the
 game. One of the five arcade games, each a project of its own in
 `gathering_games/`.
 
@@ -12,7 +12,7 @@ Two teams drawn at start. The actor's phone shows the word + صح/تخطي; the 
 ## How a round runs
 
 ```
-host's phone                         جمعة relay                 other phones
+host's phone                         گعدة relay                 other phones
 ┌───────────────────────────┐   room.send(view, {to})   ┌──────────────────────┐
 │ Table (lib/gathering)     │ ─────────────────────────▶│ draws its own view   │
 │  engine/ (pure rules)     │ ◀───────────────────────── │ {k:'sync'|'act'}     │
@@ -23,14 +23,14 @@ host's phone                         جمعة relay                 other phones
 - Opened from the store, outside a room, the game greets the signed-in player
   and offers «العب ويا ربعك» (`room.create()`) and «انضم لغرفة»
   (`room.join()`); the room's lobby then takes the game's place.
-- جمعة opens the game on every phone when the host starts a round. The
+- گعدة opens the game on every phone when the host starts a round. The
   host's page sets the game up (its own options), deals, and sends each phone
   **its own** `RoomView`: secrets never travel to a phone they are not for,
   and nothing goes in the room's shared state.
 - The engine is the old server's, unchanged: `options → start → act →
-  settle → view`, plus `scores` for جمعة's results.
+  settle → view`, plus `scores` for گعدة's results.
 - The host ends the round («النتائج» / «إنهاء الجولة»): `room.end({scores})`.
-  جمعة ranks them, shows them in the room's lobby, and «العب مرة ثانية»
+  گعدة ranks them, shows them in the room's lobby, and «العب مرة ثانية»
   opens a fresh page for the next round in the same room.
 - A guest's page asks the host for its view until it comes, and again after
   a reconnect. A host's page reload resumes the round from localStorage; a

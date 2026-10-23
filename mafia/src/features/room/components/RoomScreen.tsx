@@ -18,7 +18,7 @@ import { RoundOver } from './RoundOver'
 import { TurnAlert } from './TurnAlert'
 
 /**
- * One round of an online game in جمعة's room: the host's setup (the game's
+ * One round of an online game in گعدة's room: the host's setup (the game's
  * own options), the game, and the round's end. The room itself — the code,
  * who joins, the start and the results — is the app's.
  */

@@ -1,6 +1,6 @@
 // The game, run on the host's phone. This is the old game server's room
 // (rooms, seats, the clock, a view per phone) cut down to one round of one
-// room: جمعة owns the room itself — who is in it, the code, the start, the
+// room: گعدة owns the room itself — who is in it, the code, the start, the
 // results — and its relay carries the messages (wire.ts). The engines in
 // engine/games are the server's, unchanged: pure functions over plain data.
 //

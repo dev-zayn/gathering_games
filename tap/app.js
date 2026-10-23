@@ -1,4 +1,4 @@
-/* سباق النقر — a sample real-time game for جمعة (fixture.tap), served
+/* سباق النقر — a sample real-time game for گعدة (fixture.tap), served
    beside its manifest. It runs inside the app's game frame over
    `window.gathering` (docs/GAME_BRIDGE.md) and the five frame messages;
    opened from disk in a desktop browser, a stand-in bridge below keeps it
@@ -227,7 +227,7 @@
         invite: refuse('not_in_room'),
       },
       close: function () { toast('خارج التطبيق', 'ماكو إطار يتسكّر.'); },
-      minimize: function () { toast('خارج التطبيق', 'التصغير يشتغل بس داخل جمعة.'); },
+      minimize: function () { toast('خارج التطبيق', 'التصغير يشتغل بس داخل گعدة.'); },
       goBack: function () { history.back(); },
       reload: function () { location.reload(); },
       reloadHome: function () { location.replace(location.pathname); },
@@ -475,8 +475,8 @@
     invalid_code: 'هذا مو رمز غرفة.',
     offline: 'ماكو اتصال؛ اتصل وجرّب مرة ثانية.',
     timeout: 'الشبكة بطيئة؛ جرّب مرة ثانية.',
-    not_supported: 'الغرف تشتغل بس داخل تطبيق جمعة.',
-    unknown_action: 'حدّث جمعة حتى تسوّي غرفة من داخل اللعبة.',
+    not_supported: 'الغرف تشتغل بس داخل تطبيق گعدة.',
+    unknown_action: 'حدّث گعدة حتى تسوّي غرفة من داخل اللعبة.',
   };
 
   var entering = false;
@@ -544,8 +544,8 @@
     removed: 'المنظّم طلّعك من هالبطولة.',
     offline: 'ماكو اتصال؛ اتصل وجرّب مرة ثانية.',
     timeout: 'الشبكة بطيئة؛ جرّب مرة ثانية.',
-    not_supported: 'البطولات تشتغل بس داخل تطبيق جمعة.',
-    unknown_action: 'حدّث جمعة حتى تسوّي بطولة من داخل اللعبة.',
+    not_supported: 'البطولات تشتغل بس داخل تطبيق گعدة.',
+    unknown_action: 'حدّث گعدة حتى تسوّي بطولة من داخل اللعبة.',
   };
 
   /** The four keys under the game, held while one of them is at work. */
@@ -946,7 +946,7 @@
         key('رجّة', "haptic('vibrate')", function () { g.haptic('vibrate'); }),
       ]),
       row('copyToClipboard(text) · getFromClipboard()', 'النسخ ما يرجع شي؛ القراءة ترجع النص أو null.', [
-        key('انسخ', "copyToClipboard('جمعة · سباق النقر')", function () { g.copyToClipboard('جمعة · سباق النقر'); }),
+        key('انسخ', "copyToClipboard('گعدة · سباق النقر')", function () { g.copyToClipboard('گعدة · سباق النقر'); }),
         key('اقرأ', 'getFromClipboard()', function () { return g.getFromClipboard(); }),
       ]),
       row('openExternalUrl(url)', 'يفتح الرابط برّا التطبيق؛ يرجع true إذا انفتح.', [
@@ -1222,7 +1222,7 @@
     var where = $('where');
     where.textContent = '';
     var b = document.createElement('b');
-    b.textContent = inHost ? 'داخل جمعة' : 'بالمتصفح';
+    b.textContent = inHost ? 'داخل گعدة' : 'بالمتصفح';
     where.append(b, document.createTextNode(inHost
       ? ': كل نداء يروح لـ window.gathering ويرجع بجواب المضيف.'
       : ': ماكو مضيف، فبديل الجسر يجاوب بداله (التخزين بهذا المتصفح، وماكو غرفة).'));

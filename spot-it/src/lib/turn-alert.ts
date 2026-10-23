@@ -1,5 +1,5 @@
 // «YOUR TURN»: a buzz, an 8-bit chime and a blinking title. A phone whose
-// game is not on screen hears nothing: جمعة keeps a playing room's frame up.
+// game is not on screen hears nothing: گعدة keeps a playing room's frame up.
 
 import { haptic } from '@/lib/miniapp'
 

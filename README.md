@@ -1,10 +1,10 @@
-# جمعة's games
+# گعدة's games
 
-Every minigame جمعة plays, one folder each, outside both projects: the
+Every minigame گعدة plays, one folder each, outside both projects: the
 platform (`../gathering`) lists and serves them, the app (`../gathering_app`)
 opens them in its game frame, and neither holds a copy. A game is a mini app
 as a studio would ship one: a page beside its manifest at
-`.well-known/gathering-game.json`, talking to جمعة only through
+`.well-known/gathering-game.json`, talking to گعدة only through
 `window.gathering` (`../gathering_app/docs/GAME_BRIDGE.md`).
 
 | Folder | Registry id | Players | What it is |

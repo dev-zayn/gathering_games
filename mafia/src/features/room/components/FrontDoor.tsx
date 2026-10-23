@@ -20,7 +20,7 @@ interface Props {
 /**
  * The game opened on its own, outside a room: who is playing (the app's
  * signed-in player), and the way into a room for this game — «العب ويا
- * ربعك» makes one with this phone as host, «انضم لغرفة» opens جمعة's Join
+ * ربعك» makes one with this phone as host, «انضم لغرفة» opens گعدة's Join
  * sheet for this game. Once in, the room's lobby takes this page's place.
  * Below, a league of this game (`TournamentDoor`), when the app has
  * tournaments.
@@ -86,7 +86,7 @@ export function FrontDoor({ game, children }: Props) {
         </section>
       ) : (
         <GameScreen tone="plasma" className="min-h-0">
-          <p className="text-15 text-ink-soft">الغرف تشتغل بس داخل تطبيق جمعة.</p>
+          <p className="text-15 text-ink-soft">الغرف تشتغل بس داخل تطبيق گعدة.</p>
           <Button variant="outline" onClick={() => { realtime.close() }}>
             <DoorOpen />
             رجوع

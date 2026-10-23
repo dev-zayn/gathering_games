@@ -17,8 +17,8 @@ export const ROOM_WORDS: Readonly<Record<string, string>> = {
   invalid_code: 'هذا مو رمز غرفة.',
   offline: 'ماكو اتصال؛ اتصل وجرّب مرة ثانية.',
   timeout: 'الشبكة بطيئة؛ جرّب مرة ثانية.',
-  not_supported: 'الغرف تشتغل بس داخل تطبيق جمعة.',
-  unknown_action: 'حدّث جمعة حتى تسوّي غرفة من داخل اللعبة.',
+  not_supported: 'الغرف تشتغل بس داخل تطبيق گعدة.',
+  unknown_action: 'حدّث گعدة حتى تسوّي غرفة من داخل اللعبة.',
 }
 
 export const roomWords = (code: string): string => ROOM_WORDS[code] ?? 'ما صارت؛ جرّب مرة ثانية.'

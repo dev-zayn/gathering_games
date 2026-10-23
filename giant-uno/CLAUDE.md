@@ -1,11 +1,11 @@
 # CLAUDE.md
 
 بقت وحدة! · ONE LEFT! (`arcade.giant-uno`): one card game, its own mini app in
-جمعة, 2–10 players, each on their own phone with a hand nobody else sees:
+گعدة, 2–10 players, each on their own phone with a hand nobody else sees:
 the colour-and-number game by the Giant edition's rules (108 cards with two
 blank house-rule wilds, Draw Four challenges, «وحدة!» on the last card,
 one hand or hands to 200/500). Built on the arcade kit (from لگطها!'s copy);
-the room is جمعة's and the host's phone runs the game. React 19 + Vite 8 +
+the room is گعدة's and the host's phone runs the game. React 19 + Vite 8 +
 Tailwind v4 + shadcn (radix-nova, RTL). Arabic, RTL, mobile-only,
 retro-arcade look. See README.md.
 
@@ -98,7 +98,7 @@ landing on the pile or drawn into the hand, `animate-rise-in` for a panel,
 ## State & realtime
 
 - One page is one round of one room (gathering_app/docs/GAME_BRIDGE.md). The
-  room — code, members, start, results — is جمعة's; `lib/gathering/bridge.ts`
+  room — code, members, start, results — is گعدة's; `lib/gathering/bridge.ts`
   types the calls the game makes, `lib/miniapp.ts` the haptics. With a
   target, the hands to it are dealt inside the one round: the round ends
   when a total reaches it, never a "new game" inside a page.
@@ -119,7 +119,7 @@ landing on the pile or drawn into the hand, `animate-rise-in` for a panel,
   does not ring it again; it clears as soon as the move is made (it covers
   the seats, where «مسكته!» is).
 - The host ends the round with `realtime.finish()` → `room.end({scores})`
-  (the engine's `scores`); جمعة ranks them and plays the next round in a
+  (the engine's `scores`); گعدة ranks them and plays the next round in a
   fresh page.
 - A host who leaves takes the game with them: a game not yet begun moves to
   the new host, one under way ends the round. A host's page reload resumes

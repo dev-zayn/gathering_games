@@ -1,4 +1,4 @@
-// The few app-level calls the games make outside the room, through جمعة's
+// The few app-level calls the games make outside the room, through گعدة's
 // bridge (lib/gathering/bridge.ts). In a plain browser they fall back to the
 // web's own APIs.
 

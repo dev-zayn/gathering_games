@@ -7,7 +7,7 @@ import { readWire, type Wire } from '@/lib/gathering/wire'
 import { toast } from '@/lib/toast-store'
 import { alertTurn } from '@/lib/turn-alert'
 
-// This phone's place in the round, over جمعة's room (lib/gathering). The
+// This phone's place in the round, over گعدة's room (lib/gathering). The
 // host's phone runs the game (`Table`); every other phone asks it for its
 // view and sends it moves. The screens read one snapshot either way, the
 // same `RoomView` the old game server sent.
@@ -22,14 +22,14 @@ export type Phase =
   /** In the round, waiting for the host's page to answer. */
   | 'waiting'
   | 'live'
-  /** The round is over: جمعة shows its results in the room's lobby. */
+  /** The round is over: گعدة shows its results in the room's lobby. */
   | 'ended'
 
 export interface Snapshot {
   phase: Phase
   status: Status
   room: RoomView | null
-  /** Unused since the room is جمعة's; kept for the screens that read it. */
+  /** Unused since the room is گعدة's; kept for the screens that read it. */
   fatal: string | null
   /** hostNow − clientNow, so countdowns agree across phones. */
   clockOffset: number
@@ -38,7 +38,7 @@ export interface Snapshot {
   results: Result[] | null
   /** The app's signed-in player; null in a plain browser. */
   me: Player | null
-  /** Inside جمعة (rooms can be made and joined from here), not a plain browser. */
+  /** Inside گعدة (rooms can be made and joined from here), not a plain browser. */
   inApp: boolean
   /** The app has tournaments: they can be made and joined from the front door. */
   tournaments: boolean
@@ -257,7 +257,7 @@ export const realtime = {
     if (table) table.receive(me, { k: 'act', action })
     else post({ k: 'act', action }, hostId)
   },
-  /** The host ends the round: جمعة ranks the scores and shows them in the room. */
+  /** The host ends the round: گعدة ranks the scores and shows them in the room. */
   async finish(): Promise<void> {
     if (!g || !table) return
     try {
@@ -308,7 +308,7 @@ export const realtime = {
   dismissTurn() {
     set({ turn: null })
   },
-  /** Back to جمعة: the frame closes, the room stays. */
+  /** Back to گعدة: the frame closes, the room stays. */
   close() {
     g?.close()
   },

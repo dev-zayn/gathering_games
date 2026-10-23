@@ -12,7 +12,7 @@ interface Props {
   isHost: boolean
 }
 
-/** The mini-game is decided: the winner, and the host's key to جمعة's results. */
+/** The mini-game is decided: the winner, and the host's key to گعدة's results. */
 export function SpotOver({ view, isHost }: Props) {
   const you = view.standings.find((s) => s.you)
   const won = !!you && view.winners.includes(you.name)

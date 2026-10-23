@@ -5,7 +5,7 @@ import type { Post } from '@/lib/gathering/mailer'
 import { Table } from '@/lib/gathering/table'
 import type { Wire } from '@/lib/gathering/wire'
 
-// Whole games, as جمعة plays them: the host's phone runs the table, the
+// Whole games, as گعدة plays them: the host's phone runs the table, the
 // other phones talk to it through a relay that keeps `to` messages to
 // their one phone, as the platform's does.
 

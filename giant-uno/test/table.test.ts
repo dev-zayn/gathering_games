@@ -7,7 +7,7 @@ import type { Wire } from '@/lib/gathering/wire'
 
 const ONE_HAND = { target: 0, scoring: 'winner', house: 'again' }
 
-// Whole games, as جمعة plays them: the host's phone runs the table, the
+// Whole games, as گعدة plays them: the host's phone runs the table, the
 // other phones talk to it through a relay that keeps `to` messages to
 // their one phone, as the platform's does.
 

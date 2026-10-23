@@ -100,7 +100,7 @@ const face = (card: number | null, at: number): SpotCard | null => (card === nul
 export const spotIt: Engine<State, SpotOptions> = {
   id: 'spot-it',
 
-  // Highest best for جمعة: where the fewest cards win, a score is the count below zero.
+  // Highest best for گعدة: where the fewest cards win, a score is the count below zero.
   scores: (s) => s.ids.map((id) => ({ player: id, score: lowWins(s.mode) ? -countOf(s, id) : countOf(s, id) })),
 
   options(raw) {

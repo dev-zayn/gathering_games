@@ -13,7 +13,7 @@ interface Props {
   results: Result[] | null
 }
 
-/** The round is over: the standings as جمعة ranked them, and the way back to the room. */
+/** The round is over: the standings as گعدة ranked them, and the way back to the room. */
 export function RoundOver({ room, results }: Props) {
   const nameOf = (id: string) => room?.players.find((p) => p.id === id)?.name ?? '؟'
   const rows = [...(results ?? [])].sort((a, b) => (a.rank ?? 0) - (b.rank ?? 0))

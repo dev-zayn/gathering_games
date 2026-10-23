@@ -1,4 +1,4 @@
-// A stand-in for جمعة's room in a plain browser, for working on the games
+// A stand-in for گعدة's room in a plain browser, for working on the games
 // without phones: open the page with `?dev` (and `&name=…`) in several tabs
 // of one browser and each tab is a player at one table, the first one the
 // host. The tabs talk over a BroadcastChannel with the relay's rules: a

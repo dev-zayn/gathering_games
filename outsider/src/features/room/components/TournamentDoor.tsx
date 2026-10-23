@@ -7,7 +7,7 @@ import { tournamentWords } from '../data/tournament-words'
 
 /**
  * The front door's tournament: a league of this game with friends (it
- * seats too many for a knockout's duels). «سوّي دوري» opens جمعة's own
+ * seats too many for a knockout's duels). «سوّي دوري» opens گعدة's own
  * sheet to make one, «انضم لبطولة» its sheet for a tournament's code; once
  * in, the tournament's page takes this page's place. Shown only in an app
  * that has tournaments.

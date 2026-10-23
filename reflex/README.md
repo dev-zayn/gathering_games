@@ -1,7 +1,7 @@
 # أسرع إصبع · QUICK DRAW
 
-A reaction party game for جمعة (`arcade.reflex`), 2–12 players, every one on
-**their own phone** in one of جمعة's rooms. Each draw, every phone waits
+A reaction party game for گعدة (`arcade.reflex`), 2–12 players, every one on
+**their own phone** in one of گعدة's rooms. Each draw, every phone waits
 dark; at a random moment they all light together, and the first finger down
 takes the point. A tap before the light is a false start. First to the
 target (3, 5 or 7, the host's pick) wins. One of the arcade games, each a
@@ -31,7 +31,7 @@ A reaction is a few hundred milliseconds, so the network must not decide it:
 ## How a round runs
 
 ```
-host's phone                         جمعة relay                 other phones
+host's phone                         گعدة relay                 other phones
 ┌───────────────────────────┐   room.send(view, {to})   ┌──────────────────────┐
 │ Table (lib/gathering)     │ ─────────────────────────▶│ its own pad, lit at  │
 │  engine/ (pure rules)     │ ◀───────────────────────── │ goAt; sends its ms   │
@@ -46,7 +46,7 @@ host's phone                         جمعة relay                 other phones
   pad says «استنى…», lights «دوس!», then the draw's table (every time, foul
   and miss) stays up 3 s before the next draw arms.
 - The match is over at the target: the host's «النتائج» calls
-  `room.end({scores})` with the points; جمعة ranks them, and «العب مرة
+  `room.end({scores})` with the points; گعدة ranks them, and «العب مرة
   ثانية» plays the next round in the same room.
 - A host's page reload resumes the round from localStorage; a host who
   leaves ends a round under way.

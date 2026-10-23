@@ -1,7 +1,7 @@
 # لگطها! · QUICK EYE
 
-A speed-matching party game for جمعة (`arcade.spot-it`), 2–8 players, every
-one on **their own phone** in one of جمعة's rooms. Arabic-first (RTL),
+A speed-matching party game for گعدة (`arcade.spot-it`), 2–8 players, every
+one on **their own phone** in one of گعدة's rooms. Arabic-first (RTL),
 mobile-only. The well-known card game where any two cards share exactly one
 symbol (rules: https://officialgamerules.org/game-rules/spot-it/), with the
 box's five mini-games. Built on the same kit as the other arcade games in
@@ -27,9 +27,9 @@ box's five mini-games. Built on the same kit as the other arcade games in
 | الثلاثي · Triplet | 9 cards face up | a symbol on three cards: you take those three | no triplet left and none to deal | the most cards |
 
   Triplet deals three more cards whenever no symbol shows on three (the box
-  leaves that case open). Scores for جمعة's results are each mini-game's own
-  count, below zero where the fewest win; جمعة ranks them. The box's
-  tournament points (+5, +10, −20…) are left out: جمعة's tournaments already
+  leaves that case open). Scores for گعدة's results are each mini-game's own
+  count, below zero where the fewest win; گعدة ranks them. The box's
+  tournament points (+5, +10, −20…) are left out: گعدة's tournaments already
   score each round by place.
 
 ## A fair race over Wi-Fi
@@ -55,7 +55,7 @@ host's phone itself, which runs the game:
 ## How a round runs
 
 ```
-host's phone                         جمعة relay                 other phones
+host's phone                         گعدة relay                 other phones
 ┌───────────────────────────┐   room.send(view, {to})   ┌──────────────────────┐
 │ Table (lib/gathering)     │ ─────────────────────────▶│ draws its own view   │
 │  engine/ (pure rules)     │ ◀───────────────────────── │ {k:'sync'|'act'|     │
@@ -66,10 +66,10 @@ host's phone                         جمعة relay                 other phones
 - Opened from the store, outside a room, the game greets the signed-in player
   and offers «العب ويا ربعك» (`room.create()`) and «انضم لغرفة»
   (`room.join()`); the room's lobby then takes the game's place.
-- جمعة opens the game on every phone when the host starts a round. The
+- گعدة opens the game on every phone when the host starts a round. The
   host's page deals and sends each phone its own `RoomView`.
 - The host ends the round («النتائج» once the mini-game is decided, or
-  «إنهاء الجولة» any time): `room.end({scores})`. جمعة ranks them, shows them
+  «إنهاء الجولة» any time): `room.end({scores})`. گعدة ranks them, shows them
   in the room's lobby, and «العب مرة ثانية» opens a fresh page for the next
   round in the same room, where the host can pick another mini-game.
 - A host's page reload resumes the round from localStorage; a host who

@@ -1,10 +1,10 @@
 # CLAUDE.md
 
 أسرع إصبع · QUICK DRAW (`arcade.reflex`): one party game, its own mini app
-in جمعة, 2–12 players, each on their own phone: every pad lights at one
+in گعدة, 2–12 players, each on their own phone: every pad lights at one
 moment and the first finger down takes the point. Without a room, the front
 door also opens the original split-screen duel for two on **one phone**.
-The room is جمعة's and the host's phone runs the game. React 19 + Vite 8 +
+The room is گعدة's and the host's phone runs the game. React 19 + Vite 8 +
 Tailwind v4 + shadcn (radix-nova, RTL). Arabic, RTL, mobile-only,
 retro-arcade look. See README.md.
 
@@ -90,7 +90,7 @@ physics → framer `m.*` (never `motion.*`) under `<LazyMotion>`.
 ## State & realtime
 
 - One page is one round of one room (gathering_app/docs/GAME_BRIDGE.md). The
-  room — code, members, start, results — is جمعة's; `lib/gathering/bridge.ts`
+  room — code, members, start, results — is گعدة's; `lib/gathering/bridge.ts`
   types the calls the game makes, `lib/miniapp.ts` the haptics.
 - The host's page runs the game: `lib/gathering/table.ts` over the engine in
   `engine/`. Other pages send it `{k: 'sync' | 'act' | 'ping'}` and draw the
@@ -108,7 +108,7 @@ physics → framer `m.*` (never `motion.*`) under `<LazyMotion>`.
 - The host's outbox (`mailer.ts`) keeps under the relay's 30 frames a second,
   one pending view per phone, the newest winning.
 - The host ends the round with `realtime.finish()` → `room.end({scores})`
-  (the points); جمعة ranks them and plays the next round in a fresh page.
+  (the points); گعدة ranks them and plays the next round in a fresh page.
   Never a "new game" inside a page.
 - A host who leaves takes the game with them: a game not yet begun moves to
   the new host, one under way ends the round. A host's page reload resumes

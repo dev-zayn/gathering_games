@@ -1,8 +1,8 @@
 # CLAUDE.md
 
 منو أكثر واحد؟ · CROWN RUSH (`arcade.most-likely`): one party game, its own mini app in
-جمعة, 3–16 players, each on their own phone. Ported from a standalone
-web app with its own Bun game server; here the room is جمعة's and the host's
+گعدة, 3–16 players, each on their own phone. Ported from a standalone
+web app with its own Bun game server; here the room is گعدة's and the host's
 phone runs the game. React 19 + Vite 8 + Tailwind v4 + shadcn (radix-nova,
 RTL). Arabic, RTL, mobile-only, retro-arcade look. See README.md.
 
@@ -34,7 +34,7 @@ app. The registry lists it as `arcade.most-likely`.
 and options) → `shared/data/most-likely-prompts.ts` (the cards) → `engine/games/most-likely.ts` (the engine: validate
 every action, never put another player's secret in `view`, return `yourTurn`
 whenever the game waits on that player — that's what fires the turn alert —
-and `scores` for جمعة's results; registered in `engine/games/index.ts`) →
+and `scores` for گعدة's results; registered in `engine/games/index.ts`) →
 `test/table.test.ts` → `src/features/most-likely/`: `MostLikelyRules` (at the front door), `MostLikelyLobby`, `MostLikelyRoom` →
 `features/room/components/GameDoor|GameLobby|GamePlay` (where the room's
 screens hand over to the game) → the cabinet and poster in
@@ -80,7 +80,7 @@ physics → framer `m.*` (never `motion.*`) under `<LazyMotion>`.
 ## State & realtime
 
 - One page is one round of one room (gathering_app/docs/GAME_BRIDGE.md). The
-  room — code, members, start, results — is جمعة's; `lib/gathering/bridge.ts`
+  room — code, members, start, results — is گعدة's; `lib/gathering/bridge.ts`
   types the calls the game makes, `lib/miniapp.ts` the haptics.
 - The host's page runs the game: `lib/gathering/table.ts` (the old server's
   room, one round) over the engine in `engine/`. Other pages send it
@@ -91,7 +91,7 @@ physics → framer `m.*` (never `motion.*`) under `<LazyMotion>`.
 - The host's outbox (`mailer.ts`) keeps under the relay's 30 frames a second,
   one pending view per phone, the newest winning.
 - The host ends the round with `realtime.finish()` → `room.end({scores})`
-  (the engine's `scores`); جمعة ranks them and plays the next round in a
+  (the engine's `scores`); گعدة ranks them and plays the next round in a
   fresh page. Never a "new game" inside a page.
 - A host who leaves takes the game with them: a game not yet begun moves to
   the new host, one under way ends the round. A host's page reload resumes
@@ -100,7 +100,7 @@ physics → framer `m.*` (never `motion.*`) under `<LazyMotion>`.
   `clockOffset`. The host's `wake` ends the turn, not the phone.
 - Opened on its own (no room), the game shows its front door
   (`features/room/components/FrontDoor.tsx`): the signed-in player from
-  `player.me()` (جمعة's session: a game never signs anyone in), «العب ويا
+  `player.me()` (گعدة's session: a game never signs anyone in), «العب ويا
   ربعك» → `room.create({visibility})`, «انضم لغرفة» → `room.join()` (the
   app's Join sheet for this game), refusals in words
   (`features/room/data/room-words.ts`, إكس أو's table; `cancelled` says

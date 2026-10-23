@@ -1,7 +1,7 @@
 # بقت وحدة! · ONE LEFT!
 
-The colour-and-number card game for جمعة (`arcade.giant-uno`), 2–10 players,
-every one on **their own phone** in one of جمعة's rooms, each hand hidden from
+The colour-and-number card game for گعدة (`arcade.giant-uno`), 2–10 players,
+every one on **their own phone** in one of گعدة's rooms, each hand hidden from
 the others. Arabic-first (RTL), mobile-only. The rules are the Giant edition's
 (https://officialgamerules.org/game-rules/giant-uno/), cards and all; on a
 phone every card is giant anyway. Built on the same kit as the other arcade
@@ -50,11 +50,11 @@ Every blank wild also calls a colour. Played as the last card it goes out
 without its rule (nothing left to swap or dump), except the hunt, which
 still lands like a last draw card.
 
-### Scores for جمعة
+### Scores for گعدة
 
 `room.end({scores})`, highest best: with a target, each player's total (below
 zero under the other count); for one hand, the points the winner went out
-with, and for everyone else what they were left holding, below zero. جمعة
+with, and for everyone else what they were left holding, below zero. گعدة
 ranks them. Stacking draw cards is a house rule the box mentions but does
 not play, so it is left out.
 
@@ -68,7 +68,7 @@ Between hands the next deal comes in 15 s, or when the host taps «وزّع هس
 ## How a round runs
 
 ```
-host's phone                         جمعة relay                 other phones
+host's phone                         گعدة relay                 other phones
 ┌───────────────────────────┐   room.send(view, {to})   ┌──────────────────────┐
 │ Table (lib/gathering)     │ ─────────────────────────▶│ draws its own view   │
 │  engine/ (pure rules)     │ ◀───────────────────────── │ {k:'sync'|'act'}     │
@@ -79,11 +79,11 @@ host's phone                         جمعة relay                 other phones
 - Opened from the store, outside a room, the game greets the signed-in player
   and offers «العب ويا ربعك» (`room.create()`) and «انضم لغرفة»
   (`room.join()`); the room's lobby then takes the game's place.
-- جمعة opens the game on every phone when the host starts a round. The
+- گعدة opens the game on every phone when the host starts a round. The
   host's page deals and sends each phone its own `RoomView`: its own hand,
   everyone else's count. A hand never travels anywhere else.
 - The host ends the round («النتائج» once it is decided, or «إنهاء الجولة»
-  any time): `room.end({scores})`. «العب مرة ثانية» in جمعة opens a fresh
+  any time): `room.end({scores})`. «العب مرة ثانية» in گعدة opens a fresh
   page for the next round in the same room.
 - A host's page reload resumes the round from localStorage; a host who
   leaves the room ends a round under way.

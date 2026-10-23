@@ -40,7 +40,7 @@ export interface Engine<S, O> {
   wake?: (state: S, ctx: Ctx) => S
   view: (state: S, ctx: Ctx, playerId: string) => { view: GameView; yourTurn: string | null }
   /**
-   * The round's results for جمعة, when the host ends it: one score per
+   * The round's results for گعدة, when the host ends it: one score per
    * player who was dealt in, highest best. The platform ranks them.
    */
   scores: (state: S) => Score[]

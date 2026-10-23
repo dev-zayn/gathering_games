@@ -1,10 +1,10 @@
 # CLAUDE.md
 
 لگطها! · QUICK EYE (`arcade.spot-it`): one party game, its own mini app in
-جمعة, 2–8 players, each on their own phone: the card game where any two
+گعدة, 2–8 players, each on their own phone: the card game where any two
 cards share exactly one symbol, with the box's five mini-games (the tower,
 the well, the hot potato, the poisoned gift, the triplet). Built on the
-arcade kit (from منو أكثر واحد؟); the room is جمعة's and the host's phone runs
+arcade kit (from منو أكثر واحد؟); the room is گعدة's and the host's phone runs
 the game. React 19 + Vite 8 + Tailwind v4 + shadcn (radix-nova, RTL).
 Arabic, RTL, mobile-only, retro-arcade look. See README.md.
 
@@ -95,7 +95,7 @@ physics → framer `m.*` (never `motion.*`) under `<LazyMotion>`.
 ## State & realtime
 
 - One page is one round of one room (gathering_app/docs/GAME_BRIDGE.md). The
-  room — code, members, start, results — is جمعة's; `lib/gathering/bridge.ts`
+  room — code, members, start, results — is گعدة's; `lib/gathering/bridge.ts`
   types the calls the game makes, `lib/miniapp.ts` the haptics.
 - The host's page runs the game: `lib/gathering/table.ts` (the old server's
   room, one round) over the engine in `engine/`. Other pages send it
@@ -106,7 +106,7 @@ physics → framer `m.*` (never `motion.*`) under `<LazyMotion>`.
 - The host's outbox (`mailer.ts`) keeps under the relay's 30 frames a second,
   one pending view per phone, the newest winning.
 - The host ends the round with `realtime.finish()` → `room.end({scores})`
-  (the engine's `scores`); جمعة ranks them and plays the next round in a
+  (the engine's `scores`); گعدة ranks them and plays the next round in a
   fresh page. Never a "new game" inside a page.
 - A host who leaves takes the game with them: a game not yet begun moves to
   the new host, one under way ends the round. A host's page reload resumes
@@ -126,7 +126,7 @@ physics → framer `m.*` (never `motion.*`) under `<LazyMotion>`.
   their stamps, not their arrival, decide.
 - Opened on its own (no room), the game shows its front door
   (`features/room/components/FrontDoor.tsx`): the signed-in player from
-  `player.me()` (جمعة's session: a game never signs anyone in), «العب ويا
+  `player.me()` (گعدة's session: a game never signs anyone in), «العب ويا
   ربعك» → `room.create({visibility})`, «انضم لغرفة» → `room.join()` (the
   app's Join sheet for this game), refusals in words
   (`features/room/data/room-words.ts`, إكس أو's table; `cancelled` says

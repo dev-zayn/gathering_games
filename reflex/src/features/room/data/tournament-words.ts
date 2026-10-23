@@ -20,7 +20,7 @@ export const TOURNAMENT_WORDS: Readonly<Record<string, string>> = {
   removed: 'المنظّم طلّعك من هالبطولة.',
   offline: 'ماكو اتصال؛ اتصل وجرّب مرة ثانية.',
   timeout: 'الشبكة بطيئة؛ جرّب مرة ثانية.',
-  not_supported: 'البطولات تشتغل بس داخل تطبيق جمعة.',
+  not_supported: 'البطولات تشتغل بس داخل تطبيق گعدة.',
 }
 
 export const tournamentWords = (code: string): string => TOURNAMENT_WORDS[code] ?? 'ما صارت؛ جرّب مرة ثانية.'

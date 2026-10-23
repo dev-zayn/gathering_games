@@ -1,4 +1,4 @@
-// `window.gathering`: the جمعة app's bridge, injected into the game frame
+// `window.gathering`: the گعدة app's bridge, injected into the game frame
 // (gathering_app/docs/GAME_BRIDGE.md). Only the calls these games make are
 // typed here. Every bridge call in the arcade goes through this file or
 // lib/miniapp.ts.

@@ -6,7 +6,7 @@
   "entry": "${PUBLIC_URL}/tap/",
   "orientation": "portrait",
   "splash": false,
-  "publisher": { "tier": "partner", "name": "عيّنات جمعة" },
+  "publisher": { "tier": "partner", "name": "عيّنات گعدة" },
   "scopes": ["identity:read", "results:write"],
   "permissions": [],
   "room": {

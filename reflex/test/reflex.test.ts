@@ -126,7 +126,7 @@ describe('a draw', () => {
 })
 
 describe('a match', () => {
-  test('first to the target wins; the points are جمعة’s scores', () => {
+  test('first to the target wins; the points are گعدة’s scores', () => {
     const t = tableAt(3, 3)
     for (let draw = 0; draw < 10 && t.s.phase !== 'over'; draw++) {
       if (t.s.phase === 'result') t.to(t.s.until)
