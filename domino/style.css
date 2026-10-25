@@ -1,0 +1,237 @@
+  :root{
+    --bg1:#0b3d2e; --bg2:#0f5137; --felt:#13724f; --felt-edge:#0a4631;
+    --tile:#faf7ef; --tile-edge:#d9d2bf; --pip:#1c1c1c; --pip-red:#c0392b;
+    --gold:#e8c468; --gold-2:#c9a24a; --ink:#0d2b20; --txt:#f3efe2;
+    --accent:#3fb98f; --danger:#e06b5a;
+    --shadow: 0 10px 24px rgba(0,0,0,.35);
+    --font: "Segoe UI", "Tahoma", system-ui, -apple-system, sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0; font-family:var(--font); color:var(--txt);
+    background:
+      radial-gradient(1200px 600px at 50% -10%, #17604a 0%, transparent 60%),
+      linear-gradient(160deg, var(--bg1), var(--bg2));
+    overflow:hidden;                 /* لا شيء يخرج عن الشاشة */
+    height:100dvh; height:100vh;
+    display:flex; flex-direction:column;
+    -webkit-tap-highlight-color: transparent;
+  }
+  header.app{
+    flex:0 0 auto;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:12px 18px; gap:12px;
+    background:linear-gradient(180deg, rgba(0,0,0,.25), transparent);
+    border-bottom:1px solid rgba(255,255,255,.06);
+  }
+  .brand{display:flex; align-items:center; gap:12px}
+  .logo{
+    width:44px; height:44px; border-radius:12px;
+    background:linear-gradient(145deg,#1b1b1b,#2e2e2e);
+    display:grid; grid-template-columns:1fr 1fr; place-items:center;
+    box-shadow: var(--shadow), inset 0 1px 0 rgba(255,255,255,.08);
+    position:relative; padding:5px; gap:3px;
+  }
+  .logo span{width:7px;height:7px;border-radius:50%;background:var(--tile);display:block}
+  .logo::after{content:"";position:absolute;inset:0;border:2px solid var(--gold);border-radius:12px;opacity:.5}
+  .brand h1{font-size:20px;margin:0;letter-spacing:.5px}
+  .brand p{margin:0;font-size:12px;color:#bfe0d1;opacity:.8}
+  .toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  .btn{
+    cursor:pointer;border:none;border-radius:10px;padding:9px 14px;font-size:14px;
+    font-family:inherit;font-weight:600;color:var(--ink);
+    background:linear-gradient(180deg,var(--gold),var(--gold-2));
+    box-shadow: var(--shadow); transition:transform .08s ease, filter .15s;
+  }
+  .btn:hover{filter:brightness(1.05)}
+  .btn:active{transform:translateY(1px)}
+  .btn.ghost{background:rgba(255,255,255,.08);color:var(--txt);border:1px solid rgba(255,255,255,.15)}
+  a.btn{display:inline-block;text-decoration:none;line-height:1.2}
+  .sitelink{color:var(--gold);text-decoration:none;font-weight:700}
+  .sitelink:hover{text-decoration:underline}
+  .btn:disabled{opacity:.45;cursor:not-allowed;filter:grayscale(.3)}
+
+  main{max-width:1100px;width:100%;margin:0 auto;padding:12px 14px;
+    flex:1 1 auto;min-height:0;display:flex;flex-direction:column;gap:2px}
+
+  /* Scoreboard — شريط مُدمج أنحف */
+  .scoreboard{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+  .pcard{
+    flex:1 1 0;min-width:0;background:rgba(0,0,0,.22);border:1px solid rgba(255,255,255,.08);
+    border-radius:10px;padding:6px 10px;display:flex;align-items:center;gap:8px;transition:.2s;
+  }
+  .pcard.turn{border-color:var(--gold);box-shadow:0 0 0 2px rgba(232,196,104,.25)}
+  .pcard .nm{font-weight:700;font-size:13px;display:flex;align-items:center;gap:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .pcard .meta{font-size:11px;color:#c7e3d6;opacity:.8;margin-inline-start:auto;white-space:nowrap}
+  .pcard .sc{font-size:19px;font-weight:800;color:var(--gold);margin-inline-start:4px}
+  .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);display:inline-block;flex:0 0 auto}
+  .pcard.turn .dot{box-shadow:0 0 8px var(--accent)}
+
+  /* Table / board — أكبر وأبرز */
+  .felt{
+    background:
+      radial-gradient(1000px 600px at 50% 40%, var(--felt) 0%, var(--felt-edge) 88%);
+    border:10px solid #073021; border-radius:22px;
+    box-shadow: inset 0 0 60px rgba(0,0,0,.45), var(--shadow);
+    padding:14px; position:relative; display:flex; flex-direction:column;
+    flex:1 1 auto; min-height:0;        /* يملأ المساحة المتبقية ويحصر اللوحة داخله */
+  }
+  .status{
+    text-align:center;font-size:15px;min-height:20px;margin-bottom:8px;color:#eafff6;
+    text-shadow:0 1px 2px rgba(0,0,0,.4);font-weight:600;
+  }
+  .ends{text-align:center;font-size:12px;color:#bfe0d1;margin-bottom:4px;min-height:16px;opacity:.75}
+
+  .boardwrap{padding:10px;border-radius:14px;flex:1;position:relative;overflow:hidden;
+    display:flex;align-items:center;justify-content:center}
+  /* الطاولة: مساحة إحداثيات مُطلقة — كل حجر يُوضع بموضع ودوران محسوبَين (مسار أفعى مربّع) */
+  .board{
+    direction:ltr; position:relative; transform-origin:center center; margin:0 auto;
+  }
+  /* رأس الخط (الطرف المفتوح) — حلقة ذهبية داخلية */
+  .tile.endtile{
+    z-index:3;
+    box-shadow:inset 0 0 0 3px var(--gold), 0 0 16px rgba(232,196,104,.6);
+    animation:headglow 1.4s ease-in-out infinite;
+  }
+  @keyframes headglow{0%,100%{box-shadow:inset 0 0 0 3px var(--gold),0 0 9px rgba(232,196,104,.4)}
+    50%{box-shadow:inset 0 0 0 3px var(--gold),0 0 22px rgba(232,196,104,.8)}}
+  /* النصف المفتوح من الرأس مُبرز لتمييز الرقم المطلوب */
+  .tile .half.open{background:radial-gradient(circle at 50% 50%, rgba(232,196,104,.45), rgba(232,196,104,.08))}
+  /* الرأس الصالح للإفلات أثناء السحب — توهّج أقوى */
+  .tile.droplive{cursor:pointer;z-index:5;
+    box-shadow:inset 0 0 0 3px var(--gold),0 0 0 3px rgba(232,196,104,.45),0 0 26px rgba(232,196,104,.75)}
+  .tile.droplive.over{transform:scale(1.08);
+    box-shadow:inset 0 0 0 3px #fff,0 0 0 4px rgba(255,255,255,.6),0 0 30px rgba(232,196,104,.9)}
+
+  /* خانة بداية اللعب على لوحة فارغة (ليست رمز ＋ بل مكان أول حجر) */
+  .startslot{display:grid;place-items:center;border:3px dashed rgba(255,255,255,.3);
+    border-radius:8px;color:#bfe0d1;font-size:13px;text-align:center;padding:6px;opacity:.6;
+    width:120px;height:62px}
+  .startslot.active{opacity:1;cursor:pointer;border-style:solid;border-color:var(--gold);color:#fff;
+    background:radial-gradient(circle at 50% 50%, rgba(232,196,104,.3), rgba(232,196,104,.08));
+    box-shadow:0 0 0 3px rgba(232,196,104,.25),0 0 20px rgba(232,196,104,.5);animation:pulse 1.2s ease-in-out infinite}
+  .startslot.over{transform:scale(1.06);border-color:#fff;box-shadow:0 0 0 4px rgba(255,255,255,.4),0 0 26px rgba(232,196,104,.7)}
+  @keyframes pulse{0%,100%{box-shadow:0 0 0 3px rgba(232,196,104,.2),0 0 12px rgba(232,196,104,.35)}
+    50%{box-shadow:0 0 0 4px rgba(232,196,104,.45),0 0 26px rgba(232,196,104,.65)}}
+
+  /* Domino tiles */
+  .tile{
+    display:inline-grid;background:linear-gradient(160deg,var(--tile),#efe9d6);
+    border:1px solid var(--tile-edge);border-radius:6px;box-shadow:0 2px 5px rgba(0,0,0,.28);
+    position:relative;
+  }
+  /* الأحجار على الطاولة ملتصقة بلا فراغ */
+  .board .tile{border-radius:3px}
+  .board .tile:not(.endtile){box-shadow:none;border-color:rgba(0,0,0,.2)}
+  .tile.h{grid-template-columns:1fr 1fr;width:100px;height:50px}
+  .tile.v{grid-template-rows:1fr 1fr;width:50px;height:100px}
+  .tile .half{position:relative;display:grid;place-items:center;padding:4px}
+  .tile.h .half:first-child{border-inline-end:1px solid var(--tile-edge)}
+  .tile.v .half:first-child{border-bottom:1px solid var(--tile-edge)}
+  .pips{display:grid;width:100%;height:100%;padding:5px;
+    grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr)}
+  .pips i{width:9px;height:9px;border-radius:50%;background:var(--pip);align-self:center;justify-self:center}
+  .pips i.r{background:var(--pip-red)}
+  /* pip position helpers via nth mapping done in JS by class names */
+  .p-0{grid-area:unset}
+  .pos1{grid-column:2;grid-row:2}
+  .posTL{grid-column:1;grid-row:1}.posTR{grid-column:3;grid-row:1}
+  .posML{grid-column:1;grid-row:2}.posMR{grid-column:3;grid-row:2}
+  .posBL{grid-column:1;grid-row:3}.posBR{grid-column:3;grid-row:3}
+  .posC {grid-column:2;grid-row:2}
+  .posTC{grid-column:2;grid-row:1}.posBC{grid-column:2;grid-row:3}
+
+  .board .tile{animation:drop .25s ease}
+  @keyframes drop{from{transform:scale(.6);opacity:0}to{transform:scale(1);opacity:1}}
+
+  /* Player hand */
+  .handwrap{margin-top:8px;flex:0 0 auto}
+  .hand-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+  .hand-title b{font-size:16px}
+  .hand{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;padding:4px;overflow:auto;max-height:118px}
+  .hand .tile.playable{cursor:pointer;outline:2px solid transparent;transition:.15s}
+  .hand .tile.playable:hover{transform:translateY(-6px)}
+  .hand .tile.selected{outline:2px solid var(--gold);box-shadow:0 0 0 3px rgba(232,196,104,.3),var(--shadow);transform:translateY(-6px)}
+  .hand .tile.dead{opacity:.4;filter:grayscale(.6)}
+  .hand .tile.dragging{opacity:.3;filter:grayscale(.4)}
+  .hand .tile.playable{cursor:grab;touch-action:none}
+  .hand .tile.playable:active{cursor:grabbing}
+  /* القطعة الطائرة أثناء السحب — تتبع الإصبع/الماوس */
+  .tile.ghost{
+    position:fixed; z-index:100; pointer-events:none; margin:0;
+    transform:scale(1.15) rotate(-3deg);
+    box-shadow:0 18px 30px rgba(0,0,0,.5); opacity:.97;
+  }
+
+  .controls{display:flex;gap:8px;justify-content:center;margin-top:10px;flex-wrap:wrap}
+
+  /* choose end prompt */
+  .endpick{display:flex;gap:8px;justify-content:center;margin-top:8px}
+
+  /* Modal */
+  .overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;place-items:center;z-index:50;padding:20px}
+  .overlay.show{display:grid}
+  .modal{
+    background:linear-gradient(160deg,#0f5137,#0b3d2e);border:1px solid rgba(232,196,104,.4);
+    border-radius:18px;max-width:460px;width:100%;padding:22px;box-shadow:var(--shadow);text-align:center;
+  }
+  .modal h2{margin:0 0 6px;color:var(--gold)}
+  .modal p{color:#dff1e8;line-height:1.6;margin:8px 0}
+  .modal .row{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:14px}
+  .seg{display:inline-flex;background:rgba(0,0,0,.25);border-radius:12px;padding:4px;gap:4px;margin:8px 0}
+  .seg button{border:none;background:transparent;color:var(--txt);padding:8px 14px;border-radius:9px;cursor:pointer;font-family:inherit;font-weight:600}
+  .seg button.active{background:linear-gradient(180deg,var(--gold),var(--gold-2));color:var(--ink)}
+  .rules{text-align:right;max-height:300px;overflow:auto;font-size:14px;line-height:1.8;color:#eafff6}
+  .rules li{margin:4px 0}
+  .log{position:fixed;inset-inline-start:12px;bottom:12px;max-width:300px;font-size:12px;color:#bfe0d1;
+    background:rgba(0,0,0,.3);border-radius:10px;padding:8px 10px;max-height:120px;overflow:auto;display:none}
+  .log.show{display:block}
+  @media (max-width:560px){
+    main{padding:8px}
+    header.app{padding:10px 12px}
+    .brand p{display:none}
+    .brand h1{font-size:18px}
+    .btn{padding:8px 11px;font-size:13px}
+    .scoreboard{gap:6px}
+    .pcard{padding:5px 8px}
+    .pcard .nm{font-size:12px}
+    .pcard .sc{font-size:17px}
+    .felt{padding:8px;border-width:6px}
+    .boardwrap{padding:6px 2px}
+    .tile.h{width:72px;height:36px}.tile.v{width:36px;height:72px}
+    .pips i{width:7px;height:7px}
+    .pips{padding:4px}
+    .startslot{width:90px;height:46px;font-size:12px}
+    .hand{gap:6px}
+    .controls .btn{flex:1 1 40%}
+  }
+  @media (max-width:380px){
+    .tile.h{width:60px;height:30px}.tile.v{width:30px;height:60px}
+    .pips i{width:6px;height:6px}
+    .pips{padding:3px}
+  }
+
+  /* ===== گعدة: الغرفة، البطولة، والتنبيهات ===== */
+  body{padding-bottom:env(safe-area-inset-bottom)}
+  .matchbar{display:block;width:100%;margin:0 0 8px;padding:8px 12px;border-radius:10px;cursor:pointer;
+    border:1px solid rgba(232,196,104,.45);background:rgba(0,0,0,.25);color:var(--txt);
+    font:inherit;font-size:13px;text-align:start;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .matchbar b{color:var(--gold)}
+  .matchbar[hidden]{display:none}
+  .pcard.me{border-color:rgba(63,185,143,.55)}
+  .pcard.away{opacity:.6}
+  .modal h3{margin:14px 0 4px;font-size:16px;color:var(--gold)}
+  .modal .hello{font-weight:700;color:#fff;margin-top:0}
+  .modal .together{padding-bottom:12px;margin-bottom:6px;border-bottom:1px solid rgba(255,255,255,.12)}
+  .modal .check{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:10px;font-size:14px;color:#dff1e8}
+  .modal .check input{width:18px;height:18px;accent-color:var(--gold)}
+  .modal .line{font-size:13px;color:var(--gold);min-height:18px;margin:10px 0 0}
+  .modal .line.bad{color:var(--danger)}
+  .modal{max-height:calc(100dvh - 40px);overflow:auto}
+  .toast{position:fixed;inset-inline:16px;top:calc(env(safe-area-inset-top) + 12px);z-index:60;max-width:420px;margin:0 auto;
+    padding:10px 14px;border-radius:12px;background:rgba(7,48,33,.95);border:1px solid rgba(232,196,104,.5);color:var(--txt);
+    font-size:14px;text-align:center;box-shadow:var(--shadow);opacity:0;transform:translateY(-8px);transition:.2s;pointer-events:none}
+  .toast.show{opacity:1;transform:none}
+  .toast.bad{border-color:var(--danger)}

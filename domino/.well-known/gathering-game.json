@@ -1,0 +1,21 @@
+{
+  "id": "arcade.domino",
+  "name": "الدومينو",
+  "version": "1.1.0",
+  "mode": "embedded",
+  "entry": "${PUBLIC_URL}/domino/",
+  "orientation": "portrait",
+  "splash": false,
+  "publisher": { "tier": "partner", "name": "أركيد گعدة" },
+  "scopes": ["identity:read"],
+  "permissions": [],
+  "room": {
+    "players": { "min": 2, "max": 4 },
+    "host": "authoritative",
+    "pace": "turn",
+    "lan": true,
+    "state": "none",
+    "rejoin": true,
+    "spectators": false
+  }
+}

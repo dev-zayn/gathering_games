@@ -19,10 +19,11 @@ as a studio would ship one: a page beside its manifest at
 | `spot-it/` | `arcade.spot-it` | 2–8 | لگطها!: any two cards share one symbol; first to tap it wins. The box's five mini-games, a race made fair over Wi-Fi. |
 | `giant-uno/` | `arcade.giant-uno` | 2–10 | بقت وحدة!: the colour-and-number card game (the Giant edition's 108 cards, its blank house-rule wilds): match the pile, Draw Four challenges, say «وحدة!» on your last card. One hand, or hands to 200 or 500. |
 | `backgammon/` | `arcade.backgammon` | 2 | طاولي: backgammon by the box's rules (the cube, gammons, Crawford), each side on its own phone; without a room, against الحجّي or two on one phone. A look of its own: a Baghdad café at night, not the arcade's. |
+| `domino/` | `arcade.domino` | 2–4 | الدومينو: double-six dominoes, each player on their own phone (the host's phone deals and sends every phone its own hand), or one player against the computer outside a room. A plain game; its source is github.com/haider-majid/domino. |
 
 ## Two shapes
 
-- **A plain game** (`xo`, `tap`): the folder is the page. No build step,
+- **A plain game** (`xo`, `tap`, `domino`): the folder is the page. No build step,
   nothing loaded from the network; opened from disk in a desktop browser, a
   stand-in bridge keeps it working.
 - **A built game** (the eight arcade games): a React + Vite project of its
