@@ -18,19 +18,21 @@ as a studio would ship one: a page beside its manifest at
 | `reflex/` | `arcade.reflex` | 2–12 | أسرع إصبع: every phone lights at once, first finger down takes the point (timed on each phone, so lag never decides). Without a room: the split-screen duel on one phone. |
 | `spot-it/` | `arcade.spot-it` | 2–8 | لگطها!: any two cards share one symbol; first to tap it wins. The box's five mini-games, a race made fair over Wi-Fi. |
 | `giant-uno/` | `arcade.giant-uno` | 2–10 | بقت وحدة!: the colour-and-number card game (the Giant edition's 108 cards, its blank house-rule wilds): match the pile, Draw Four challenges, say «وحدة!» on your last card. One hand, or hands to 200 or 500. |
+| `backgammon/` | `arcade.backgammon` | 2 | طاولي: backgammon by the box's rules (the cube, gammons, Crawford), each side on its own phone; without a room, against الحجّي or two on one phone. A look of its own: a Baghdad café at night, not the arcade's. |
 
 ## Two shapes
 
 - **A plain game** (`xo`, `tap`): the folder is the page. No build step,
   nothing loaded from the network; opened from disk in a desktop browser, a
   stand-in bridge keeps it working.
-- **A built game** (the seven arcade games): a React + Vite project of its
+- **A built game** (the eight arcade games): a React + Vite project of its
   own (`bun install`, `bun run build`, `bun run lint`, `bun run test`), with
   its own `package.json`, `bun.lock`, tests, README and CLAUDE.md. The
   manifest's source is `public/.well-known/`; the build puts the page and
   the manifest in `dist/`. The first five began as one project and share a
   kit (components, the bridge, the host's table, the look); `spot-it` was
-  built from منو أكثر واحد؟'s copy and `giant-uno` from `spot-it`'s. Each holds its own copy cut down to what
+  built from منو أكثر واحد؟'s copy, `giant-uno` from `spot-it`'s and
+  `backgammon` from `giant-uno`'s (the logic only: its look is its own). Each holds its own copy cut down to what
   it uses: change the kit in each game that has it. Only `spot-it`'s and
   `reflex`'s copies read the host's clock (`host-clock.ts`, `ping`/`pong` on
   the wire), which a reaction race needs.
@@ -39,7 +41,7 @@ as a studio would ship one: a page beside its manifest at
 
 The room games take part in the platform's tournaments
 (`../gathering/docs/TOURNAMENTS.md`) through `window.gathering.tournament`.
-Opened outside a room, `xo`, `tap`, `reflex`, `spot-it` and `giant-uno` offer «سوّي
+Opened outside a room, `xo`, `tap`, `reflex`, `spot-it`, `giant-uno` and `backgammon` offer «سوّي
 بطولة» and «انضم لبطولة» (any format: they seat two), and the four other
 arcade room games offer a league («سوّي دوري»: they seat three or more, too
 many for a knockout's duels). In a match room each shows a
@@ -61,7 +63,9 @@ filled in with the server's address.
 For a phone on the Wi-Fi, `PUBLIC_URL` is the Mac's address
 (`http://<ip>:8091`). The registry keeps each game's manifest address, so
 after the address changes, move every game to it from the console (or
-`PUT /v1/admin/games/{id}/manifest`).
+`PUT /v1/admin/games/{id}/manifest`). `scripts/games-on-wifi.sh` in
+`../gathering` does both at once: it restarts the fixtures on :8093 at the
+Mac's current address and moves every game there.
 
 ## Adding a game
 

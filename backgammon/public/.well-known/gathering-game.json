@@ -1,0 +1,29 @@
+{
+  "id": "arcade.backgammon",
+  "name": "طاولي",
+  "version": "1.0.0",
+  "mode": "embedded",
+  "entry": "${PUBLIC_URL}/backgammon/",
+  "orientation": "portrait",
+  "splash": false,
+  "publisher": {
+    "tier": "partner",
+    "name": "أركيد گعدة"
+  },
+  "scopes": [
+    "identity:read"
+  ],
+  "permissions": [],
+  "room": {
+    "players": {
+      "min": 2,
+      "max": 2
+    },
+    "host": "authoritative",
+    "pace": "turn",
+    "lan": true,
+    "state": "none",
+    "rejoin": true,
+    "spectators": false
+  }
+}

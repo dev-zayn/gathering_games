@@ -1,0 +1,440 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+/* Self-hosted Aref Ruqaa + Readex Pro (see src/fonts.css): the same files
+   Google serves, from our own origin, so a game on a Wi-Fi without the
+   internet still paints in its own hand. */
+@import "./fonts.css";
+
+/* One theme ships: the café after the evening prayer. Pinning the variant to
+   a class nobody sets keeps the shadcn primitives' `dark:` utilities inert —
+   the palette below is already dark. */
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* طاولي's palette — a Baghdad café at night: the espresso dark of the room,
+     the walnut box with its mother-of-pearl inlay, turquoise and brick points
+     (the domes and the brickwork), ivory and ebony checkers, and brass for
+     everything a hand reaches for. */
+  --cafe: #15100c;
+  --slab: #1f1711;
+  --slab-raised: #2a1f17;
+  --walnut: #4b2e1a;
+  --walnut-lit: #6d4628;
+  --walnut-deep: #2e1b0f;
+  --field: #24170e;
+  --pearl: #efe6d6;
+  --brass: #caa255;
+  --turquoise: #2f8f88;
+  --brick: #a64a31;
+  --ivory: #f4ecda;
+  --ebony: #1f1916;
+  --cream: #f3e9d6;
+
+  /* Semantic tokens mapped onto the palette (shadcn-compatible names). */
+  --background: var(--cafe);
+  --foreground: var(--cream);
+  --card: var(--slab);
+  --card-foreground: var(--cream);
+  --popover: var(--slab-raised);
+  --popover-foreground: var(--cream);
+  /* The hand's reach: a brass key with walnut type. */
+  --primary: var(--brass);
+  --primary-foreground: #24170c;
+  --secondary: var(--turquoise);
+  --secondary-foreground: #f6fbfa;
+  --muted: #2a1f17;
+  --muted-foreground: #b3a083;
+  --accent: #3a2c1b;
+  --accent-foreground: #ecd39c;
+  --destructive: var(--brick);
+  --border: rgb(239 230 214 / 0.1);
+  --input: rgb(239 230 214 / 0.16);
+  --ring: var(--brass);
+
+  /* Safe-area insets, indirected so a frame that misreports them can be
+     corrected in one place. Always consume these, never raw env(). */
+  --safe-top: env(safe-area-inset-top);
+  --safe-bottom: env(safe-area-inset-bottom);
+}
+
+@theme inline {
+  --font-sans: "Readex Pro", system-ui, -apple-system, sans-serif;
+  /* The Ruqʿa hand of café signs and score pads: titles, the dice's call,
+     the big moments. Never for small type: it reads from 20px up. */
+  --font-hand: "Aref Ruqaa", "Readex Pro", serif;
+
+  /* Font-size-only tokens, px-named, with NO line-height companion. Register
+     every new one in the tailwind-merge font-size group in src/lib/utils.ts. */
+  --text-10: 0.625rem;
+  --text-11: 0.6875rem;
+  --text-12: 0.75rem;
+  --text-13: 0.8125rem;
+  --text-14: 0.875rem;
+  --text-15: 0.9375rem;
+  --text-16: 1rem;
+  --text-17: 1.0625rem;
+  --text-18: 1.125rem;
+  --text-20: 1.25rem;
+  --text-22: 1.375rem;
+  --text-24: 1.5rem;
+  --text-28: 1.75rem;
+  --text-32: 2rem;
+  --text-40: 2.5rem;
+  --text-48: 3rem;
+  --text-64: 4rem;
+
+  /* Radii by role — worn wood, nothing sharp. */
+  --radius-control: 0.625rem; /* 10 — chips, tiles */
+  --radius-button: 0.875rem; /* 14 — keys */
+  --radius-card: 1.125rem; /* 18 — slabs */
+  --radius-sheet: 1.5rem; /* 24 — sheets, the box */
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Ink — lamp light on paper. */
+  --color-ink: var(--cream);
+  --color-ink-soft: #cdbb9d;
+  --color-ink-faint: #8f7c63;
+  /* Surfaces: the room, the table slabs, a slab lifted under the hand. */
+  --color-cafe: var(--cafe);
+  --color-slab: var(--slab);
+  --color-slab-raised: var(--slab-raised);
+  --color-hairline: rgb(239 230 214 / 0.1);
+  --color-hairline-strong: rgb(239 230 214 / 0.2);
+  /* The box. */
+  --color-walnut: var(--walnut);
+  --color-walnut-lit: var(--walnut-lit);
+  --color-walnut-deep: var(--walnut-deep);
+  --color-field: var(--field);
+  --color-field-lit: #2f1e12;
+  --color-field-deep: #1b1009;
+  --color-pearl: var(--pearl);
+  --color-pearl-dim: #b6a78f;
+  /* The sheen's colours: mother-of-pearl turns rose and mint as it catches the lamp. */
+  --color-pearl-rose: #e4dde8;
+  --color-pearl-mint: #dde8e2;
+  /* Brass — the call to action, the cube, the turn. */
+  --color-brass: var(--brass);
+  --color-brass-lit: #e6c77f;
+  --color-brass-deep: #94712f;
+  --color-brass-soft: #3a2c1b;
+  --color-brass-ink: #24170c;
+  /* Turquoise — the second key, links, the points' cool half. */
+  --color-turquoise: var(--turquoise);
+  --color-turquoise-lit: #45aaa2;
+  --color-turquoise-deep: #1f625d;
+  --color-turquoise-soft: #16302d;
+  /* Brick — the points' warm half, a hit, a loss, danger. */
+  --color-brick: var(--brick);
+  --color-brick-lit: #c4664b;
+  --color-brick-deep: #77311f;
+  --color-brick-soft: #3a1b13;
+  /* The checkers. */
+  --color-ivory: var(--ivory);
+  --color-ivory-lit: #fffaf0;
+  --color-ivory-shade: #d6c7aa;
+  --color-ivory-groove: #b9a582;
+  --color-ebony: var(--ebony);
+  --color-ebony-lit: #3d332c;
+  /* Tea in the istikan. */
+  --color-tea: #b4481c;
+  --color-tea-deep: #5c1c09;
+  /* Status. */
+  --color-mint: #86c9a2;
+  --color-mint-soft: #18301f;
+
+  /* Easings: `settle` is a checker coming to rest; `out-back` overshoots. */
+  --ease-settle: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-out-back: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-in-cubic: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+
+  /* ── Motion ────────────────────────────────────────────────────────────────
+     Transform/opacity only, every loop on the compositor. Wood has weight:
+     things settle, nothing blinks. */
+
+  /* A slab or a line settling into place. `backwards`, not `both`: a kept
+     transform would trap any `position: fixed` child. */
+  --animate-rise-in: rise-in 360ms var(--ease-settle) backwards;
+  @keyframes rise-in {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+  }
+  /* A panel laid on the board: a short drop and a settle. */
+  --animate-lay-down: lay-down 420ms var(--ease-out-back) backwards;
+  @keyframes lay-down {
+    from {
+      opacity: 0;
+      transform: translateY(-8px) scale(0.94);
+    }
+  }
+  /* The box lid swinging open on its hinge (the loading screen). */
+  --animate-lid-open: lid-open 760ms var(--ease-in-cubic) both;
+  @keyframes lid-open {
+    0% {
+      transform: perspective(900px) rotateX(0deg);
+      opacity: 1;
+    }
+    70% {
+      opacity: 1;
+    }
+    100% {
+      transform: perspective(900px) rotateX(-105deg);
+      opacity: 0;
+    }
+  }
+  --animate-fade-out: fade-out 520ms ease-in 240ms both;
+  @keyframes fade-out {
+    to {
+      opacity: 0;
+    }
+  }
+  /* Steam off the tea glass. */
+  --animate-steam: steam 3.2s ease-in-out infinite;
+  @keyframes steam {
+    0% {
+      opacity: 0;
+      transform: translateY(6px) scaleY(0.8);
+    }
+    35% {
+      opacity: 0.55;
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(-14px) scaleY(1.15);
+    }
+  }
+  /* A legal landing breathing under the finger. */
+  --animate-breathe: breathe 1.6s ease-in-out infinite;
+  @keyframes breathe {
+    0%,
+    100% {
+      opacity: 0.55;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+  /* The turn's plate lamp, a slow warm pulse. */
+  --animate-lamp: lamp 2.4s ease-in-out infinite;
+  @keyframes lamp {
+    0%,
+    100% {
+      opacity: 0.45;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+  /* A refused move: the hand shakes its head. */
+  --animate-shake: shake 380ms ease-out both;
+  @keyframes shake {
+    0%,
+    100% {
+      transform: translateX(0);
+    }
+    25% {
+      transform: translateX(-5px);
+    }
+    50% {
+      transform: translateX(4px);
+    }
+    75% {
+      transform: translateX(-2px);
+    }
+  }
+  /* The call («شيش بيش!») stamped over the dice. */
+  --animate-stamp: stamp 1400ms var(--ease-out-back) both;
+  @keyframes stamp {
+    0% {
+      opacity: 0;
+      transform: scale(1.6) rotate(-8deg);
+    }
+    20% {
+      opacity: 1;
+      transform: scale(1) rotate(-4deg);
+    }
+    80% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+      transform: scale(1) rotate(-4deg) translateY(-6px);
+    }
+  }
+  /* A win's headline landing. */
+  --animate-celebrate: celebrate 640ms var(--ease-out-back) backwards;
+  @keyframes celebrate {
+    0% {
+      opacity: 0;
+      transform: scale(0.7);
+    }
+    60% {
+      opacity: 1;
+      transform: scale(1.05);
+    }
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: transparent;
+    overscroll-behavior: none;
+    background-color: var(--background);
+    color-scheme: dark;
+  }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    -webkit-user-select: none;
+    user-select: none;
+    overscroll-behavior: none;
+  }
+  a,
+  img,
+  svg {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+  input,
+  textarea,
+  select,
+  [contenteditable="true"] {
+    -webkit-user-select: text;
+    user-select: text;
+  }
+  * {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  *::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@layer utilities {
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* Safe-area padding with a spacing-scale floor: `pb-safe-4` →
+   max(bottom-inset, 1rem). Always these, never raw env(). */
+@utility pt-safe-* {
+  padding-top: max(var(--safe-top), --spacing(--value(number)));
+}
+@utility pb-safe-* {
+  padding-bottom: max(var(--safe-bottom), --spacing(--value(number)));
+}
+
+/* The room: espresso dark, the lamp's pool of light from above, and the
+   faint lattice of a shanasheel window over it all. Never animated. */
+@utility cafe-ground {
+  background-color: var(--cafe);
+  background-image:
+    radial-gradient(120% 60% at 50% -10%, rgb(230 170 90 / 0.16), transparent 60%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'%3E%3Cg fill='none' stroke='%23efe6d6' stroke-opacity='0.045' stroke-width='1'%3E%3Cpath d='M0 24 24 0l24 24-24 24Z'/%3E%3Cpath d='M24 12l12 12-12 12-12-12Z'/%3E%3Ccircle cx='24' cy='24' r='2.5'/%3E%3Ccircle cx='0' cy='0' r='2.5'/%3E%3Ccircle cx='48' cy='0' r='2.5'/%3E%3Ccircle cx='0' cy='48' r='2.5'/%3E%3Ccircle cx='48' cy='48' r='2.5'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* A table slab: a lit top edge, a soft fall of shadow, nothing hard. */
+@utility shadow-slab {
+  box-shadow:
+    inset 0 1px 0 rgb(255 240 215 / 0.06),
+    0 1px 0 rgb(0 0 0 / 0.4),
+    0 14px 30px -16px rgb(0 0 0 / 0.7);
+}
+/* A key: polished face, the darker lip it presses into. */
+@utility shadow-key {
+  box-shadow:
+    inset 0 1px 0 rgb(255 248 230 / 0.4),
+    inset 0 -2px 0 rgb(0 0 0 / 0.18),
+    0 3px 0 rgb(0 0 0 / 0.35),
+    0 10px 18px -10px rgb(0 0 0 / 0.6);
+}
+@utility shadow-key-pressed {
+  box-shadow:
+    inset 0 1px 0 rgb(255 248 230 / 0.3),
+    inset 0 2px 4px rgb(0 0 0 / 0.25),
+    0 1px 0 rgb(0 0 0 / 0.35);
+}
+/* Mother-of-pearl: the inlay's soft sheen, for a band or a rule. */
+@utility pearl-sheen {
+  background-image: linear-gradient(115deg, #efe6d6 0%, #e6dfe9 22%, #f3ead6 45%, #dfe9e3 68%, #efe6d6 100%);
+}
+/* Brass polish: the face of every brass key and of the cube. */
+@utility brass-face {
+  background-image: linear-gradient(180deg, #e9cc87 0%, #caa255 48%, #b18a42 100%);
+}
+@utility turquoise-face {
+  background-image: linear-gradient(180deg, #45aaa2 0%, #2f8f88 52%, #23766f 100%);
+}
+@utility walnut-face {
+  background-image: linear-gradient(160deg, #6d4628 0%, #4b2e1a 45%, #2e1b0f 100%);
+}
+
+/* The board's size: as wide as the page allows, never so tall that the two
+   plates under and over it leave the screen. 360 × 552 is the board's own
+   drawing; `--board-chrome` is what the screen holds besides it. */
+@utility board-fit {
+  width: min(100%, calc((100dvh - var(--board-chrome, 16rem)) * 360 / 552));
+  aspect-ratio: 360 / 552;
+}
+
+/* What a screen holds besides the board, for `board-fit`: `board-chrome-68` → 17rem. */
+@utility board-chrome-* {
+  --board-chrome: --spacing(--value(number));
+}
+
+/* A gradient stop in a token colour: `<stop className="stop-brass-lit" />`. */
+@utility stop-* {
+  stop-color: --value(--color-*);
+}
+
+/* Bottom-sheet ceiling — tall enough for a form, never covering the host bar. */
+@utility max-h-sheet {
+  max-height: 85dvh;
+}
+
+/* Stagger a one-off entrance: `animation-delay-150` → 150ms. */
+@utility animation-delay-* {
+  animation-delay: calc(--value(integer) * 1ms);
+}
+
+/* Wide screens: the app is framed as a phone-width card with a 1rem margin,
+   and its <main> becomes the scroller. */
+@utility h-shell {
+  height: calc(100dvh - 2rem);
+}
